@@ -1,0 +1,39 @@
+.register-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.register-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-row label {
+    margin-bottom: 5px;
+}
+
+.register-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}
