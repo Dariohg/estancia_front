@@ -4,6 +4,8 @@ import Render from "./Render";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import '../src/styles/nav.css';
+import "../src/styles/home.css";
 
 function App() {
     return (
