@@ -4,6 +4,7 @@ import Render from "./Render";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Enlaces from "./pages/Enlaces"
 
 function App() {
     return (
@@ -13,6 +14,8 @@ function App() {
                 <Route path="login" element={<Login />} />
                 <Route path="home" element={<Render component={<Home />} />} />
                 <Route path="register" element={<Register/>}/>
+                <Route path="enlaces" element={<Render component={<Enlaces/>} />} />
+
             </Routes>
         </Router>
     );
