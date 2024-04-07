@@ -12,13 +12,13 @@ function App() {
             <Routes>
                 <Route path="/" element={<Navigate to="login" />} />
                 <Route path="login" element={<Login />} />
-                <Route path="home" element={<Render component={<Home />} />} />
+                <Route path="home" element={<Render><Home /></Render>} />
                 <Route path="register" element={<Register/>}/>
-                <Route path="enlaces" element={<Render component={<Enlaces/>} />} />
-
+                <Route path="enlaces" element={<Render><Enlaces/></Render>} />
             </Routes>
         </Router>
     );
 }
+
 
 export default App;

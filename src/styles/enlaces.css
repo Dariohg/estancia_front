@@ -1,6 +1,10 @@
 .title {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.separacion{
+    margin-bottom: 50px;
 }
 
 .table-container {
@@ -29,7 +33,8 @@
     background-color: #f9f9f9;
 }
 
-.table tbody tr:hover {
+/* Aplica el efecto hover solo a la tabla principal */
+.table-container .table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -56,7 +61,6 @@
     cursor: pointer;
 }
 
-
 .detalle-container {
     margin-top: 10px;
 }
@@ -69,12 +73,20 @@
 
 .detalle-table th,
 .detalle-table td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
+    padding: 5px; /* Reducir el padding */
+    text-align: left; /* Alinear el texto a la izquierda */
+    border: none; /* Eliminar los bordes */
 }
 
 .detalle-table th {
     background-color: #f2f2f2;
     font-weight: bold;
+}
+
+.icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Ajusta el tamaño según sea necesario */
+    height: 24px; /* Ajusta el tamaño según sea necesario */
 }

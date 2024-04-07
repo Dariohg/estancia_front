@@ -8,3 +8,45 @@
     color: white;
     padding: 10px;
 }
+
+.main_options {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+}
+
+.option {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.sub_options {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.sub_option {
+    cursor: pointer;
+    padding: 12px;
+    background-color: #444;
+    color: white;
+
+}
+
+.contain_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
+
+.menu_title {
+    margin: 0;
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 30px;
+}

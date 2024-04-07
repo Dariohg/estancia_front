@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import menosSvg from '../assets/menos.svg';
+import masSvg from '../assets/mas.svg';
 import '../styles/enlaces.css';
 
 const Enlaces = () => {
@@ -26,14 +28,26 @@ const Enlaces = () => {
         },
     ];
 
-    const Row = ({ item }) => {
-        const [open, setOpen] = useState(false);
+    const [openIndices, setOpenIndices] = useState([]);
+
+    const toggleOpen = (index) => {
+        if (openIndices.includes(index)) {
+            setOpenIndices(openIndices.filter((i) => i !== index));
+        } else {
+            setOpenIndices([...openIndices, index].slice(-2));
+        }
+    };
+
+    const Row = ({ item, index }) => {
+        const isOpen = openIndices.includes(index);
 
         return (
             <>
                 <tr>
                     <td>
-                        <button onClick={() => setOpen(!open)}>{open ? '▲' : '▼'}</button>
+                        <button className="icon-button" onClick={() => toggleOpen(index)}>
+                            {isOpen ? <img src={menosSvg} alt="Menos" /> : <img src={masSvg} alt="Más" />}
+                        </button>
                     </td>
                     <td>{item.nombre}</td>
                     <td>{item.telefono}</td>
@@ -42,7 +56,7 @@ const Enlaces = () => {
                     <td>{item.estatus}</td>
                     <td>Acción</td>
                 </tr>
-                {open && (
+                {isOpen && (
                     <tr>
                         <td colSpan="7">
                             <div className="detalle-container">
@@ -75,6 +89,7 @@ const Enlaces = () => {
     return (
         <div>
             <div className="title">Enlaces</div>
+            <hr className="separacion" />
             <div className="search-container">
                 <input
                     type="text"
@@ -98,7 +113,7 @@ const Enlaces = () => {
                     </thead>
                     <tbody>
                     {data.map((item, index) => (
-                        <Row key={index} item={item} />
+                        <Row key={index} item={item} index={index} />
                     ))}
                     </tbody>
                 </table>
