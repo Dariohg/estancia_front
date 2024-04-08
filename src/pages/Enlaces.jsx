@@ -7,24 +7,33 @@ const Enlaces = () => {
     const data = [
         {
             nombre: 'Nombre1',
-            telefono: '123456789',
             correo: 'correo1@example.com',
-            ubicacion: 'Ubicacion1',
-            estatus: 'Activo',
+            telefono: '123456789',
+            dependencia: 'Dependencia 1',
+            direccion: 'Direccion 1',
+            adscripcion: 'Adscripcion 1',
+            cargo: 'Cargo 1',
+            accion: 'Activo',
         },
         {
             nombre: 'Nombre2',
-            telefono: '987654321',
             correo: 'correo2@example.com',
-            ubicacion: 'Ubicacion2',
-            estatus: 'Inactivo',
+            telefono: '987654321',
+            dependencia: 'Dependencia 2',
+            direccion: 'Direccion 2',
+            adscripcion: 'Adscripcion 2',
+            cargo: 'Cargo 2',
+            accion: 'Inactivo',
         },
         {
             nombre: 'Nombre3',
-            telefono: '567890123',
             correo: 'correo3@example.com',
-            ubicacion: 'Ubicacion3',
-            estatus: 'Activo',
+            telefono: '567890123',
+            dependencia: 'Dependencia 3',
+            direccion: 'Direccion 3',
+            adscripcion: 'Adscripcion 3',
+            cargo: 'Cargo 3',
+            accion: 'Activo',
         },
     ];
 
@@ -50,30 +59,34 @@ const Enlaces = () => {
                         </button>
                     </td>
                     <td>{item.nombre}</td>
-                    <td>{item.telefono}</td>
                     <td>{item.correo}</td>
-                    <td>{item.ubicacion}</td>
-                    <td>{item.estatus}</td>
+                    <td>{item.telefono}</td>
+                    <td>{item.dependencia}</td>
+                    <td>{item.direccion}</td>
+                    <td>{item.adscripcion}</td>
+                    <td>{item.cargo}</td>
                     <td>Acción</td>
                 </tr>
                 {isOpen && (
                     <tr>
-                        <td colSpan="7">
+                        <td colSpan="9"> {/* Ajuste aquí */}
                             <div className="detalle-container">
                                 <table className="detalle-table">
                                     <thead>
                                     <tr>
-                                        <th>Fecha</th>
-                                        <th>Enlace</th>
-                                        <th>Nombre</th>
+                                        <th>Fecha de contrato</th>
+                                        <th>Tipo de instalación</th>
+                                        <th>Tipo de contrato</th>
+                                        <th>Versión de contrato</th>
                                         <th>Estatus</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>2020-01-05</td>
-                                        <td>www.example.com</td>
-                                        <td>Nombre Detalle</td>
+                                        <td>Nube</td>
+                                        <td>Hosting</td>
+                                        <td>Basico</td>
                                         <td>Activo</td>
                                     </tr>
                                     </tbody>
@@ -86,9 +99,12 @@ const Enlaces = () => {
         );
     };
 
+
     return (
         <div>
-            <div className="title">Enlaces</div>
+            <div className="container_titulo">
+                <h1 className="titulo">Enlaces</h1>
+            </div>
             <hr className="separacion" />
             <div className="search-container">
                 <input
@@ -104,10 +120,12 @@ const Enlaces = () => {
                     <tr>
                         <th />
                         <th>Nombre</th>
-                        <th>Número de Teléfono</th>
                         <th>Correo Electrónico</th>
-                        <th>Ubicación</th>
-                        <th>Estatus</th>
+                        <th>Número de Teléfono</th>
+                        <th>Dependencia</th>
+                        <th>Dirección</th>
+                        <th>Adscripción</th>
+                        <th>Cargo</th>
                         <th>Acción</th>
                     </tr>
                     </thead>

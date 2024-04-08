@@ -1,0 +1,75 @@
+
+.titulo {
+    font-size: 22px;
+    height: 5vh;
+}
+
+.register-container {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px;
+    width: 100%;
+    height: 75vh;
+}
+
+
+.contain_dependencia,
+.contain_direccion,
+.contain_departamento,
+.contain_nombre,
+.contain_ApellidoP,
+.contain_apellidoM,
+.contain_correo,
+.contain_telefono,
+.contain_cargo{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.contain_nombre,
+.contain_departamento,
+.contain_cargo {
+    grid-column: 1 / span 2;
+}
+
+.formulario-container label {
+    margin-bottom: 5px;
+}
+
+.formulario-container input,
+.formulario-container select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px;
+}
+
+
+.green-button {
+    background-color: green;
+    color: white;
+    grid-column: 1;
+}
+
+.yellow-button {
+    background-color: yellow;
+    color: black;
+    grid-column: 2;
+}
+.green-button,
+.yellow-button{
+    border: none;
+    height: 6vh;
+    width: 12vw;
+    border-radius: 8px;
+}
+

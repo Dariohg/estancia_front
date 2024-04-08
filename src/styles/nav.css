@@ -12,7 +12,6 @@
 .main_options {
     display: flex;
     flex-direction: column;
-    background-color: red;
 }
 
 .option {
@@ -43,6 +42,7 @@
 
 .menu_title {
     margin: 0;
+    font-size: 24px;
 }
 
 .separator {

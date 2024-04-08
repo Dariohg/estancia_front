@@ -5,6 +5,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Enlaces from "./pages/Enlaces"
+import AddEnlace from "./pages/AddEnlace";
+import AddContrato from "./pages/AddContrato";
+import i18n from './i18n';
+import Contrato from "./pages/Contrato";
 
 function App() {
     return (
@@ -15,10 +19,12 @@ function App() {
                 <Route path="home" element={<Render><Home /></Render>} />
                 <Route path="register" element={<Register/>}/>
                 <Route path="enlaces" element={<Render><Enlaces/></Render>} />
+                <Route path="addEnlace" element={<Render><AddEnlace/></Render>}/>
+                <Route path="addContrato" element={<Render><AddContrato/></Render>}/>
+                <Route path="contrato" element={<Render><Contrato/></Render>}/>
             </Routes>
         </Router>
     );
 }
-
 
 export default App;

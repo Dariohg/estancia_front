@@ -1,0 +1,53 @@
+.formulario-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin: 20px;
+}
+
+.contain_cliente,
+.contain_fechaContrato,
+.contain_instalacion,
+.contain_contrato,
+.contain_version,
+.descripcion,
+.botones{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.formulario-container label {
+    margin-bottom: 5px;
+
+}
+
+.formulario-container select,
+.formulario-container input[type="date"],
+.formulario-container textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.textAreaDescripcion{
+    height: 10vh;
+}
+
+.formulario-container .boton-guardar {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.formulario-container .boton-cancelar {
+    grid-column: span 1;
+    background-color: yellow;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
