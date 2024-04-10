@@ -3,7 +3,7 @@ import "../styles/register.css";
 
 const Register = () => {
     return (
-        <div className="register-container">
+        <div className="register-containerr">
             <h2>Registro de Nuevo Usuario</h2>
             <form className="register-form">
                 <div className="register-row">

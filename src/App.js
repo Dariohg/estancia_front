@@ -9,6 +9,7 @@ import AddEnlace from "./pages/AddEnlace";
 import AddContrato from "./pages/AddContrato";
 import i18n from './i18n';
 import Contrato from "./pages/Contrato";
+import TablaPrueba from "./pages/TablaPrueba";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="addEnlace" element={<Render><AddEnlace/></Render>}/>
                 <Route path="addContrato" element={<Render><AddContrato/></Render>}/>
                 <Route path="contrato" element={<Render><Contrato/></Render>}/>
+                <Route path="tablaPrueba" element={<Render><TablaPrueba/></Render>}/>
             </Routes>
         </Router>
     );
