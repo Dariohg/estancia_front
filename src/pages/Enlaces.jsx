@@ -14,6 +14,7 @@ const Enlaces = () => {
             adscripcion: 'Adscripcion 1',
             cargo: 'Cargo 1',
             accion: 'Activo',
+
         },
         {
             nombre: 'Nombre2',
