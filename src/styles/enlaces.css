@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300..900&display=swap');
+
+.container_enlace{
+    margin: 0;
+    padding: 0;
+}
+
 .title {
     font-size: 24px;
     margin-bottom: 40px;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .separacion{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+.tabla_enlace_titulo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tabla_titulo{
+    margin-left: 20px;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+
 }
 
 .table-container {
-    margin: 0 20px;
+    margin: 0 ;
+    position: relative;
+
 }
 
 .table {
@@ -22,6 +51,11 @@
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: center;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 14px;
 }
 
 .table th {
@@ -40,7 +74,7 @@
 
 .search-container {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
     margin: 20px;
 }
 
@@ -87,6 +121,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px; /* Ajusta el tamaño según sea necesario */
-    height: 24px; /* Ajusta el tamaño según sea necesario */
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.pagination button {
+    margin: 0 5px;
 }

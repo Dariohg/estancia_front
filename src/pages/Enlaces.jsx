@@ -1,44 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import menosSvg from '../assets/menos.svg';
 import masSvg from '../assets/mas.svg';
 import '../styles/enlaces.css';
+import axios from 'axios';
+
+const URI = 'http://localhost:8000/enlace/';
 
 const Enlaces = () => {
-    const data = [
-        {
-            nombre: 'Nombre1',
-            correo: 'correo1@example.com',
-            telefono: '123456789',
-            dependencia: 'Dependencia 1',
-            direccion: 'Direccion 1',
-            adscripcion: 'Adscripcion 1',
-            cargo: 'Cargo 1',
-            accion: 'Activo',
-
-        },
-        {
-            nombre: 'Nombre2',
-            correo: 'correo2@example.com',
-            telefono: '987654321',
-            dependencia: 'Dependencia 2',
-            direccion: 'Direccion 2',
-            adscripcion: 'Adscripcion 2',
-            cargo: 'Cargo 2',
-            accion: 'Inactivo',
-        },
-        {
-            nombre: 'Nombre3',
-            correo: 'correo3@example.com',
-            telefono: '567890123',
-            dependencia: 'Dependencia 3',
-            direccion: 'Direccion 3',
-            adscripcion: 'Adscripcion 3',
-            cargo: 'Cargo 3',
-            accion: 'Activo',
-        },
-    ];
-
+    const [enlace, setEnlace] = useState([]);
+    const [filteredEnlace, setFilteredEnlace] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(6);
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = filteredEnlace.slice(indexOfFirstRow, indexOfLastRow);
+    const totalPages = Math.ceil(filteredEnlace.length / rowsPerPage);
     const [openIndices, setOpenIndices] = useState([]);
+
+    useEffect(() => {
+        getEnlace();
+    }, []);
+
+    const getEnlace = async () => {
+        const res = await axios.get(URI);
+        setEnlace(res.data);
+        setFilteredEnlace(res.data);
+    };
+
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        setSearchValue(value);
+        setCurrentPage(1); // Resetear a la primera página al hacer una búsqueda
+        const filteredData = enlace.filter((enlace) =>
+            enlace.nombre.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredEnlace(filteredData);
+    };
+
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const goToPage = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     const toggleOpen = (index) => {
         if (openIndices.includes(index)) {
@@ -48,7 +62,7 @@ const Enlaces = () => {
         }
     };
 
-    const Row = ({ item, index }) => {
+    const Row = ({ enlace, index }) => {
         const isOpen = openIndices.includes(index);
 
         return (
@@ -59,18 +73,18 @@ const Enlaces = () => {
                             {isOpen ? <img src={menosSvg} alt="Menos" /> : <img src={masSvg} alt="Más" />}
                         </button>
                     </td>
-                    <td>{item.nombre}</td>
-                    <td>{item.correo}</td>
-                    <td>{item.telefono}</td>
-                    <td>{item.dependencia}</td>
-                    <td>{item.direccion}</td>
-                    <td>{item.adscripcion}</td>
-                    <td>{item.cargo}</td>
+                    <td>{enlace.nombre} {enlace.apellidoP} {enlace.apellidoM}</td>
+                    <td>{enlace.correo}</td>
+                    <td>{enlace.telefono}</td>
+                    <td>{enlace.idDependencia}</td>
+                    <td>{enlace.direccion.nombre}</td>
+                    <td>{enlace.idAdscripcion}</td>
+                    <td>{enlace.cargoEnlace.nombreCargo}</td>
                     <td>Acción</td>
                 </tr>
                 {isOpen && (
                     <tr>
-                        <td colSpan="9"> {/* Ajuste aquí */}
+                        <td colSpan="9">
                             <div className="detalle-container">
                                 <table className="detalle-table">
                                     <thead>
@@ -100,20 +114,36 @@ const Enlaces = () => {
         );
     };
 
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+            if (i > 0 && i <= totalPages) {
+                pageNumbers.push(
+                    <button key={i} onClick={() => goToPage(i)}>{i}</button>
+                );
+            }
+        }
+        return pageNumbers;
+    };
 
     return (
-        <div>
+        <div className="container_enlace">
             <div className="container_titulo">
                 <h1 className="titulo">Enlaces</h1>
             </div>
             <hr className="separacion" />
-            <div className="search-container">
-                <input
-                    type="text"
-                    className="search-input"
-                    placeholder="Buscar enlaces..."
-                />
-                <button className="search-button">Buscar</button>
+            <div className="tabla_enlace_titulo">
+                <div className="tabla_titulo">Lista de enlaces</div>
+                <div className="search-container">
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Buscar enlaces..."
+                        value={searchValue}
+                        onChange={handleSearch}
+                    />
+                    <button className="search-button">Buscar</button>
+                </div>
             </div>
             <div className="table-container">
                 <table className="table">
@@ -131,11 +161,16 @@ const Enlaces = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data.map((item, index) => (
-                        <Row key={index} item={item} index={index} />
+                    {currentRows.map((enlace, index) => (
+                        <Row key={index} enlace={enlace} index={index} />
                     ))}
                     </tbody>
                 </table>
+                <div className="pagination">
+                    <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
+                    {renderPageNumbers()}
+                    <button onClick={nextPage} disabled={currentPage === totalPages}>Siguiente</button>
+                </div>
             </div>
         </div>
     );

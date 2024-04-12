@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 .contain_nav {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 200px; /* Ancho deseado para el Nav */
+    width: 12vw; /* Ancho deseado para el Nav */
     background-color: #333;
     color: white;
     padding: 10px;
@@ -12,6 +14,11 @@
 .main_options {
     display: flex;
     flex-direction: column;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    width: 11vw;
 }
 
 .option {
@@ -23,6 +30,10 @@
     display: flex;
     flex-direction: column;
     padding-left: 10px;
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .sub_option {
@@ -43,6 +54,10 @@
 .menu_title {
     margin: 0;
     font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+
 }
 
 .separator {
