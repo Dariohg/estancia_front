@@ -13,3 +13,13 @@ body {
     overflow-y: auto;
     z-index: 1;
 }
+
+.dropdown {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    outline: none;
+}

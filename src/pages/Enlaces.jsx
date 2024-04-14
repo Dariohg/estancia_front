@@ -11,7 +11,7 @@ const Enlaces = () => {
     const [filteredEnlace, setFilteredEnlace] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(6);
+    const [rowsPerPage, setRowsPerPage] = useState(1);
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = filteredEnlace.slice(indexOfFirstRow, indexOfLastRow);
@@ -77,7 +77,7 @@ const Enlaces = () => {
                     <td>{enlace.correo}</td>
                     <td>{enlace.telefono}</td>
                     <td>{enlace.idDependencia}</td>
-                    <td>{enlace.direccion.nombre}</td>
+                    <td>{enlace.direccion.nombreDireccion}</td>
                     <td>{enlace.idAdscripcion}</td>
                     <td>{enlace.cargoEnlace.nombreCargo}</td>
                     <td>Acción</td>
