@@ -4,19 +4,17 @@ import "../../styles/global.css";
 
 const Dropdown = ({ value, onChange, options }) => {
     const handleChange = (selectedOption) => {
-        onChange(selectedOption.value);
+        const selectedValue = selectedOption ? selectedOption.value : null;
+        console.log('handleChange - selectedOption:', selectedOption);
+        console.log('handleChange - selectedValue:', selectedValue);
+        onChange(selectedValue);
     };
-
-    const selectOptions = options.map((option) => ({
-        value: option.value,
-        label: option.label,
-    }));
 
     return (
         <Select
-            value={selectOptions.find(option => option.value === value)}
+            value={options.find((option) => option.value === value) || null}
             onChange={handleChange}
-            options={selectOptions}
+            options={options}
             isSearchable
             placeholder="Search..."
         />

@@ -1,95 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "../styles/addEnlace.css";
 import axios from "axios";
 import Dropdown from "./components/Dropdown";
 
-const URI = 'http://localhost:8000/cargo/';
+const URI = "http://localhost:8000/cargo/";
 
 const AddEnlace = () => {
-    const [cargo, setCargo] = useState([]);
     const [dependencia, setDependencia] = useState([]);
     const [direccion, setDireccion] = useState([]);
     const [departamento, setDepartamento] = useState([]);
+
+    const [selectedDependencia, setSelectedDependencia] = useState(null);
+    const [selectedDireccion, setSelectedDireccion] = useState(null);
+    const [selectedDepartamento, setSelectedDepartamento] = useState(null);
+
     const [nombre, setNombre] = useState("");
     const [apellidoPaterno, setApellidoPaterno] = useState("");
     const [apellidoMaterno, setApellidoMaterno] = useState("");
     const [correoElectronico, setCorreoElectronico] = useState("");
     const [telefono, setTelefono] = useState("");
-
-    const [selectedCargo, setSelectedCargo] = useState("");
-    const [selectedDependencia, setSelectedDependencia] = useState("");
-    const [selectedDireccion, setSelectedDireccion] = useState("");
-    const [selectedDepartamento, setSelectedDepartamento] = useState("");
-
-    const [filteredDirecciones, setFilteredDirecciones] = useState([]);
-    const [filteredDepartamentos, setFilteredDepartamentos] = useState([]);
+    const [cargo, setCargo] = useState([]);
+    const [selectedCargo, setSelectedCargo] = useState(null);
 
 
     useEffect(() => {
-        getCargos();
-        getDependenciasDireccionesDepartamentos();
+        getDependencias();
     }, []);
 
-    const getCargos = async () => {
+    const getDependencias = async () => {
         try {
-            const res = await axios.get('http://localhost:8000/cargo/');
-            setCargo(res.data);
-        } catch (error) {
-            console.error('Error fetching cargos:', error);
-        }
-    };
-
-    const getDependenciasDireccionesDepartamentos = async () => {
-        try {
-            const [dependenciasRes, direccionesRes, departamentosRes] = await Promise.all([
-                axios.get('http://localhost:8000/dependencia/'),
-                axios.get('http://localhost:8000/direccion/'),
-                axios.get('http://localhost:8000/departamento/')
+            const [dependenciasRes, cargosRes] = await Promise.all([
+                axios.get("http://localhost:8000/dependencia/"),
+                axios.get("http://localhost:8000/cargo/"),
             ]);
             setDependencia(dependenciasRes.data);
-            setDireccion(direccionesRes.data);
-            setDepartamento(departamentosRes.data);
+            setCargo(cargosRes.data);
         } catch (error) {
-            console.error('Error fetching dependencias, direcciones, departamentos:', error);
-        }
-    };
-
-    const handleDependenciaChange = (selectedOption) => {
-        if (selectedOption && selectedOption.value) {
-            const dependenciaId = selectedOption.value;
-            console.log("Dependencia seleccionada:", selectedOption); // Agregar este console.log
-            setSelectedDependencia(dependenciaId);
-            const filteredDirecciones = direccion.filter(d => d.dependencia_id === dependenciaId);
-            setFilteredDirecciones(filteredDirecciones);
-            setSelectedDireccion(""); // Limpiar la selección de dirección
-            setFilteredDepartamentos([]); // Limpiar los departamentos filtrados
-            setSelectedDepartamento(""); // Limpiar la selección de departamento
+            console.error("Error al obtener dependencias y cargos:", error);
         }
     };
 
 
-    const handleDireccionChange = (selectedOption) => {
-        if (selectedOption && selectedOption.value) {
-            const direccionId = selectedOption.value;
-            setSelectedDireccion(direccionId);
-            const filteredDepartamentos = departamento.filter(dep => dep.direccion_id === direccionId);
-            setFilteredDepartamentos(filteredDepartamentos);
-            setSelectedDepartamento(""); // Limpiar la selección de departamento
+    const handleDependenciaChange = async (selectedValue) => {
+        setSelectedDependencia(selectedValue);
+        console.log(selectedValue);
+        setSelectedDireccion(null);
+        setSelectedDepartamento(null);
+
+        try {
+            const response = await axios.get(`http://localhost:8000/direccion/direccionById?dependencia_id=${selectedValue}`);
+            setDireccion(response.data);
+        } catch (error) {
+            console.error("Error al obtener las direcciones:", error);
         }
     };
 
-    const handleCargoChange = (selectedOption) => {
-        setSelectedCargo(selectedOption.value);
+    const handleDireccionChange = async (selectedValue) => {
+        setSelectedDireccion(selectedValue);
+        setSelectedDepartamento(null);
+
+        try {
+            const response = await axios.get(`http://localhost:8000/departamento/departamentoById?direccion_id=${selectedValue}`);
+            setDepartamento(response.data);
+        } catch (error) {
+            console.error("Error al obtener los departamentos:", error);
+        }
     };
 
-    const hanldeDepartamentoChange = (selectedOption) => {
-        setSelectedDepartamento(selectedOption.value);
+    const handleDepartamentoChange = (selectedValue) => {
+        setSelectedDepartamento(selectedValue);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aquí puedes enviar los datos a tu backend
+    const handleCargoChange = (selectedValue) => {
+        console.log(selectedValue);
+        setSelectedCargo(selectedValue);
     };
+
+
+    const filteredDirecciones = direccion.filter((d) => d.dependencia_id === selectedDependencia);
+    const filteredDepartamentos = departamento.filter((dep) => dep.direccion_id === selectedDireccion);
 
     return (
         <div className="contain_main">
@@ -103,11 +92,10 @@ const AddEnlace = () => {
                     <Dropdown
                         id="dependencia"
                         value={selectedDependencia}
-                        onChange={(selectedOption) => handleDependenciaChange(selectedOption)}
-                        options={dependencia.map((dependencia) => ({
-                            value: dependencia.idDependencia,
-                            label: dependencia.nombreDependencia
-                        }))}
+                        onChange={handleDependenciaChange}
+                        options={dependencia.map((dep) => ({
+                            value: dep.idDependencia,
+                            label: dep.nombreDependencia }))}
                     />
                 </div>
 
@@ -117,10 +105,8 @@ const AddEnlace = () => {
                         id="direccion"
                         value={selectedDireccion}
                         onChange={handleDireccionChange}
-                        options={filteredDirecciones.map((direccion) => ({
-                            value: direccion.idDireccion,
-                            label: direccion.nombreDireccion
-                        }))}
+                        options={filteredDirecciones.map((dir) => ({ value: dir.idDireccion, label: dir.nombreDireccion }))}
+                        disabled={!selectedDependencia}
                     />
                 </div>
 
@@ -129,14 +115,11 @@ const AddEnlace = () => {
                     <Dropdown
                         id="departamento"
                         value={selectedDepartamento}
-                        onChange={hanldeDepartamentoChange}
-                        options={filteredDepartamentos.map((departamento) => ({
-                            value: departamento.idDepartamento,
-                            label: departamento.nombreDepartamento
-                        }))}
+                        onChange={handleDepartamentoChange}
+                        options={filteredDepartamentos.map((dep) => ({ value: dep.idDepartamento, label: dep.nombreDepartamento }))}
+                        disabled={!selectedDireccion}
                     />
                 </div>
-
                 <div className="contain_nombre">
                     <label htmlFor="nombre">Nombre:</label>
                     <input
