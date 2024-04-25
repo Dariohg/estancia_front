@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../styles/addEnlace.css";
 import axios from "axios";
 import Dropdown from "./components/Dropdown";
+import { useNavigate } from "react-router-dom";
+
 
 const URI = "http://localhost:8000/cargo/";
 
 const AddEnlace = () => {
+    const navigate = useNavigate();
     const [dependencia, setDependencia] = useState([]);
     const [direccion, setDireccion] = useState([]);
     const [departamento, setDepartamento] = useState([]);
@@ -22,7 +25,9 @@ const AddEnlace = () => {
     const [cargo, setCargo] = useState([]);
     const [selectedCargo, setSelectedCargo] = useState(null);
 
-
+    const handleClick = () => {
+        navigate("/enlaces");
+    };
     useEffect(() => {
         getDependencias();
     }, []);
@@ -43,17 +48,22 @@ const AddEnlace = () => {
 
     const handleDependenciaChange = async (selectedValue) => {
         setSelectedDependencia(selectedValue);
-        console.log(selectedValue);
         setSelectedDireccion(null);
         setSelectedDepartamento(null);
 
         try {
             const response = await axios.get(`http://localhost:8000/direccion/direccionById?dependencia_id=${selectedValue}`);
             setDireccion(response.data);
+            setFormData((prevData) => ({
+                ...prevData,
+                dependencia: selectedValue,
+                idDependencia: selectedValue // Asegura que idDependencia se actualice en formData
+            }));
         } catch (error) {
             console.error("Error al obtener las direcciones:", error);
         }
     };
+
 
     const handleDireccionChange = async (selectedValue) => {
         setSelectedDireccion(selectedValue);
@@ -62,23 +72,81 @@ const AddEnlace = () => {
         try {
             const response = await axios.get(`http://localhost:8000/departamento/departamentoById?direccion_id=${selectedValue}`);
             setDepartamento(response.data);
+            setFormData((prevData) => ({
+                ...prevData,
+                direccion: selectedValue,
+                idDireccion: selectedValue // Asegura que idDireccion se actualice en formData
+            }));
         } catch (error) {
             console.error("Error al obtener los departamentos:", error);
         }
     };
 
+
     const handleDepartamentoChange = (selectedValue) => {
-        setSelectedDepartamento(selectedValue);
+        setSelectedDepartamento(selectedValue); // Actualiza el estado con la opción seleccionada
+        setFormData((prevData) => ({
+            ...prevData,
+            departamento: selectedValue,
+            idDepartamento: selectedValue // Asegura que idDepartamento se actualice en formData
+        }));
     };
 
     const handleCargoChange = (selectedValue) => {
-        console.log(selectedValue);
-        setSelectedCargo(selectedValue);
+        setSelectedCargo(selectedValue); // Actualiza el estado con la opción seleccionada
+        setFormData((prevData) => ({
+            ...prevData,
+            cargo: selectedValue,
+            idCargo: selectedValue // Asegura que idCargo se actualice en formData
+        }));
     };
 
 
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
     const filteredDirecciones = direccion.filter((d) => d.dependencia_id === selectedDependencia);
     const filteredDepartamentos = departamento.filter((dep) => dep.direccion_id === selectedDireccion);
+
+    const [formData, setFormData] = useState({
+        nombre: "",
+        apellidoP: "",
+        apellidoM: "",
+        correo: "",
+        telefono: "",
+        cargo: null,
+        dependencia: null,
+        direccion: null,
+        departamento: null,
+    });
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Validar que los campos obligatorios no estén vacíos
+        if (!formData.nombre || !formData.apellidoP || !formData.apellidoM || !formData.correo || !formData.telefono || !formData.cargo || !formData.dependencia || !formData.direccion || !formData.departamento) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+
+        try {
+            const response = await axios.post("http://localhost:8000/enlace", formData);
+            console.log("Enlace agregado:", response.data);
+            alert("Enlace agregado correctamente."); // Agrega la alerta
+
+            // Aquí puedes realizar cualquier acción adicional después de agregar el enlace
+        } catch (error) {
+            console.error("Error al agregar el enlace:", error);
+        }
+    };
+
+
 
     return (
         <div className="contain_main">
@@ -125,35 +193,39 @@ const AddEnlace = () => {
                     <input
                         type="text"
                         id="nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="contain_ApellidoP">
-                    <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
+                    <label htmlFor="apellidoP">Apellido Paterno:</label>
                     <input
                         type="text"
-                        id="apellidoPaterno"
-                        value={apellidoPaterno}
-                        onChange={(e) => setApellidoPaterno(e.target.value)}
+                        id="apellidoP"
+                        name="apellidoP"
+                        value={formData.apellidoP}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="contain_apellidoM">
-                    <label htmlFor="apellidoMaterno">Apellido Materno:</label>
+                    <label htmlFor="apellidoM">Apellido Materno:</label>
                     <input
                         type="text"
-                        id="apellidoMaterno"
-                        value={apellidoMaterno}
-                        onChange={(e) => setApellidoMaterno(e.target.value)}
+                        id="apellidoM"
+                        name="apellidoM"
+                        value={formData.apellidoM}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="contain_correo">
-                    <label htmlFor="correoElectronico">Correo electrónico:</label>
+                    <label htmlFor="correo">Correo electrónico:</label>
                     <input
                         type="email"
-                        id="correoElectronico"
-                        value={correoElectronico}
-                        onChange={(e) => setCorreoElectronico(e.target.value)}
+                        id="correo"
+                        name="correo"
+                        value={formData.correo}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="contain_telefono">
@@ -161,8 +233,9 @@ const AddEnlace = () => {
                     <input
                         type="tel"
                         id="telefono"
-                        value={telefono}
-                        onChange={(e) => setTelefono(e.target.value)}
+                        name="telefono"
+                        value={formData.telefono}
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="contain_cargo">
@@ -178,8 +251,8 @@ const AddEnlace = () => {
                     />
                 </div>
                 <div className="button-container">
-                    <button type="submit" className="green-button">Guardar</button>
-                    <button type="button" className="yellow-button">Cancelar</button>
+                    <button type="submit" className="green-button" onClick={handleSubmit}>Guardar</button>
+                    <button type="button" className="yellow-button" onClick={handleClick}>Cancelar</button>
                 </div>
             </div>
         </div>

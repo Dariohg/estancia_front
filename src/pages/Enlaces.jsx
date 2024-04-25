@@ -11,7 +11,7 @@ const Enlaces = () => {
     const [filteredEnlace, setFilteredEnlace] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(6);
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = filteredEnlace.slice(indexOfFirstRow, indexOfLastRow);
