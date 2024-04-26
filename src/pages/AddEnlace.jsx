@@ -16,12 +16,6 @@ const AddEnlace = () => {
     const [selectedDependencia, setSelectedDependencia] = useState(null);
     const [selectedDireccion, setSelectedDireccion] = useState(null);
     const [selectedDepartamento, setSelectedDepartamento] = useState(null);
-
-    const [nombre, setNombre] = useState("");
-    const [apellidoPaterno, setApellidoPaterno] = useState("");
-    const [apellidoMaterno, setApellidoMaterno] = useState("");
-    const [correoElectronico, setCorreoElectronico] = useState("");
-    const [telefono, setTelefono] = useState("");
     const [cargo, setCargo] = useState([]);
     const [selectedCargo, setSelectedCargo] = useState(null);
 
@@ -124,6 +118,7 @@ const AddEnlace = () => {
         dependencia: null,
         direccion: null,
         departamento: null,
+        estatus_id: 1,
     });
 
 
@@ -138,10 +133,23 @@ const AddEnlace = () => {
         try {
             const response = await axios.post("http://localhost:8000/enlace", formData);
             console.log("Enlace agregado:", response.data);
-            alert("Enlace agregado correctamente."); // Agrega la alerta
-
-            // Aquí puedes realizar cualquier acción adicional después de agregar el enlace
-        } catch (error) {
+            alert("Enlace agregado correctamente.");
+            setFormData({
+                nombre: "",
+                apellidoP: "",
+                apellidoM: "",
+                correo: "",
+                telefono: "",
+                cargo: null,
+                dependencia: null,
+                direccion: null,
+                departamento: null,
+            });
+            setSelectedDependencia(null);
+            setSelectedDireccion(null);
+            setSelectedDepartamento(null);
+            setSelectedCargo(null);
+            } catch (error) {
             console.error("Error al agregar el enlace:", error);
         }
     };

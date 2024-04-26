@@ -3,8 +3,10 @@ import menosSvg from '../assets/menos.svg';
 import masSvg from '../assets/mas.svg';
 import '../styles/enlaces.css';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-const URI = 'http://localhost:8000/enlace/';
+
+const URI = 'http://localhost:8000/enlace/status?estatus_id=1';
 
 const Enlaces = () => {
     const [enlace, setEnlace] = useState([]);
@@ -17,6 +19,7 @@ const Enlaces = () => {
     const currentRows = filteredEnlace.slice(indexOfFirstRow, indexOfLastRow);
     const totalPages = Math.ceil(filteredEnlace.length / rowsPerPage);
     const [openIndices, setOpenIndices] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getEnlace();
@@ -80,7 +83,7 @@ const Enlaces = () => {
                     <td>{enlace.direccion.nombreDireccion}</td>
                     <td>{enlace.idAdscripcion}</td>
                     <td>{enlace.cargoEnlace.nombreCargo}</td>
-                    <td>Acción</td>
+                    <td><button onClick={() => navigate(`/modEnlace/${enlace.idEnlace}`)}>Ver más</button></td>
                 </tr>
                 {isOpen && (
                     <tr>

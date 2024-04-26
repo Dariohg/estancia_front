@@ -1,0 +1,92 @@
+.register_container_mod{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    margin: 20px;
+}
+.mod_nombre,
+.mod-apellido,
+.mod_apellidoM,
+.mod_correo,
+.mod_telefono,
+.mod_dependencia,
+.mod_direccion,
+.mod_adscripcion,
+.mod_cargo{
+    display: flex;
+    flex-direction: column;
+}
+
+.register_container_mod label{
+    margin-bottom: 5px;
+}
+
+.register_container_mod input{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.mod_buton_conteiner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content button {
+    margin-right: 10px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+}
+
+.mod_button_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.green-button-mod {
+    background-color: green;
+    color: white;
+}
+
+.yellow-button-mod {
+    background-color: yellow;
+    color: black;
+}
+.red-button-mod{
+    background-color: darkred;
+    color: white;
+
+}
+.green-button-mod,
+.yellow-button-mod,
+.red-button-mod{
+    margin: 0.3rem;
+    border: none;
+    height: 6vh;
+    width: 12vw;
+    border-radius: 8px;
+}
