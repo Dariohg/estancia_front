@@ -36,7 +36,7 @@ const Enlaces = () => {
         setSearchValue(value);
         setCurrentPage(1); // Resetear a la primera página al hacer una búsqueda
         const filteredData = enlace.filter((enlace) =>
-            enlace.nombre.toLowerCase().includes(value.toLowerCase())
+            (`${enlace.nombre} ${enlace.apellidoP} ${enlace.apellidoM}`).toLowerCase().includes(value.toLowerCase())
         );
         setFilteredEnlace(filteredData);
     };
@@ -76,7 +76,7 @@ const Enlaces = () => {
                             {isOpen ? <img src={menosSvg} alt="Menos" /> : <img src={masSvg} alt="Más" />}
                         </button>
                     </td>
-                    <td>{enlace.nombre} {enlace.apellidoP} {enlace.apellidoM}</td>
+                    <td>{`${enlace.nombre} ${enlace.apellidoP} ${enlace.apellidoM}`}</td>
                     <td>{enlace.correo}</td>
                     <td>{enlace.telefono}</td>
                     <td>{enlace.idDependencia}</td>
