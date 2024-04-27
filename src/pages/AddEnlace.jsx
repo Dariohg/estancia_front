@@ -91,7 +91,7 @@ const AddEnlace = () => {
         setFormData((prevData) => ({
             ...prevData,
             cargo: selectedValue,
-            idCargo: selectedValue // Asegura que idCargo se actualice en formData
+            idCargo: selectedValue
         }));
     };
 
