@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import "../styles/addContrato.css";
 import Dropdown from "./components/Dropdown";
 import axios from "axios";
-
 const URI = "http://localhost:8000";
 
 

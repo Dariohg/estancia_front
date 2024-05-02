@@ -4,7 +4,6 @@ import axios from "axios";
 import Dropdown from "./components/Dropdown";
 import { useNavigate } from "react-router-dom";
 
-
 const URI = "http://localhost:8000/cargo/";
 
 const AddEnlace = () => {
