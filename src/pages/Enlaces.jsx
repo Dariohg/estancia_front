@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 
-const URI = 'http://localhost:8000/enlace/status?estatus_id=1';
+const URI = 'http://localhost:8000/enlace/status?estatus=1';
 
 const Enlaces = () => {
     const [enlace, setEnlace] = useState([]);

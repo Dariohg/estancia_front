@@ -64,7 +64,7 @@ const AddEnlace = () => {
         setSelectedDepartamento(null);
 
         try {
-            const response = await axios.get(`http://localhost:8000/departamento/departamentoById?direccion_id=${selectedValue}`);
+            const response = await axios.get(`http://localhost:8000/departamento/departamentoById?id_direccion=${selectedValue}`);
             setDepartamento(response.data);
             setFormData((prevData) => ({
                 ...prevData,
@@ -106,7 +106,7 @@ const AddEnlace = () => {
     };
 
     const filteredDirecciones = direccion.filter((d) => d.dependencia_id === selectedDependencia);
-    const filteredDepartamentos = departamento.filter((dep) => dep.direccion_id === selectedDireccion);
+    const filteredDepartamentos = departamento.filter((dep) => dep.id_direccion === selectedDireccion);
 
     const [formData, setFormData] = useState({
         nombre: "",
@@ -114,11 +114,12 @@ const AddEnlace = () => {
         apellidoM: "",
         correo: "",
         telefono: "",
-        cargo: null,
-        dependencia: null,
-        direccion: null,
-        departamento: null,
-        estatus_id: 1,
+        estatus: 1,
+        adscripcion_id: null,
+        cargo_id: null,
+        auth_user_id:"",
+        tipoPersona_id:"",
+        direccion_id: null,
     });
 
 
@@ -181,7 +182,7 @@ const AddEnlace = () => {
                         id="direccion"
                         value={selectedDireccion}
                         onChange={handleDireccionChange}
-                        options={filteredDirecciones.map((dir) => ({ value: dir.idDireccion, label: dir.nombreDireccion }))}
+                        options={filteredDirecciones.map((dir) => ({ value: dir.idDireccion, label: dir.nombre }))}
                         disabled={!selectedDependencia}
                     />
                 </div>
