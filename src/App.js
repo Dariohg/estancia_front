@@ -20,7 +20,7 @@ function App() {
                 <Route path="/" element={<Navigate to="login" />} />
                 <Route path="login" element={<Login />} />
 
-                <Route element={<ProtectedRoute pagePermission="user" />}>
+                {/* <Route element={<ProtectedRoute pagePermission="user" />}> */}
                     <Route path="home" element={<Render><Home /></Render>} />
                     <Route path="enlaces" element={<Render><Enlaces/></Render>} />
                     <Route path="addEnlace" element={<Render><AddEnlace/></Render>}/>
@@ -28,11 +28,11 @@ function App() {
                     <Route path="contrato" element={<Render><Contrato/></Render>}/>
                     <Route path="tablaPrueba" element={<Render><TablaPrueba/></Render>}/>
                     <Route path="/modEnlace/:id" element={<Render><ModEnlace /></Render>}/>
-                </Route>
-
-                <Route element={<ProtectedRoute pagePermission="super_user" />}>
+                {/* </Route> */}
+{/* 
+                <Route element={<ProtectedRoute pagePermission="super_user" />}> */}
                     <Route path="register" element={<Register/>}/>
-                </Route>
+                {/* </Route> */}
 
             </Routes>
         </Router>

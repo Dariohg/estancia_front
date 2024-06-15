@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import useCustomNav from "../hook/useCustomNav";
 import { Outlet } from "react-router-dom";
-import { compare } from "bcrypt";
+
 
 const ProtectedRoute = ({ children, pagePermission }) => {
     const { navRefreshTo, currentPath } = useCustomNav();
@@ -23,9 +23,9 @@ const ProtectedRoute = ({ children, pagePermission }) => {
         }
 
         let role;
-        if (compare("super_user", roleCode)) {
+        if ("super_user", roleCode) {
             role = "super_user";
-        } else if (compare("user", roleCode)) {
+        } else if ("user", roleCode) {
             role = "user";
         } else {
             role = null;

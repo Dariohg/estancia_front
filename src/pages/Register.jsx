@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/register.css";
+import axios from "axios";
 
 const Register = () => {
     const URI = "http://localhost:8000";
